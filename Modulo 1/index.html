@@ -8,9 +8,29 @@
 </head>
 <body>
     <div id="app">
-        <h1> Curso de Vue 3 </h1>
+        <div :style="styles">
+            <label for="themeBlack">
+                <input type="checkbox" :checked="themeBlack" @click="toogleTheme" name="themeBlack" id="themeBlack"> Tema Escuro
+            </label>
+            <h1> {{ title }} </h1>
 
-        <p>  {{ name  }} {{ lastName }} </p>
+            <p>  {{ fullName }} </p>
+    
+            <hr>
+            <h3>Carrinho ({{ cart.length }})</h3>
+    
+            <ul>
+                <li v-for="(product, index) in products" :key="index">
+                    <p> {{ product.title }}</p>
+                    <img :src="product.image" :alt="product.title" style="max-width: 100px;">
+                    <strong v-if="product.stars > 0"> {{ product.stars }} </strong>
+                    <button
+                        @click.prevent="addCart(product)" :disabled="inCart(product)">
+                        ADD CART
+                    </button>
+                </li>
+            </ul>
+        </div>
     </div>
 
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>

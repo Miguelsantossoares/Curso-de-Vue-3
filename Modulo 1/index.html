@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Curso de Vue 3</title>
-    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div id="app">
@@ -21,19 +20,25 @@
     
             <ul>
                 <li v-for="(product, index) in products" :key="index">
-                    <p> {{ product.title }}</p>
-                    <img :src="product.image" :alt="product.title" style="max-width: 100px;">
-                    <strong v-if="product.stars > 0"> {{ product.stars }} </strong>
-                    <button
-                        @click.prevent="addCart(product)" :disabled="inCart(product)">
-                        ADD CART
-                    </button>
+                    <product-detail
+                        :product="product"
+                        :product-in-cart="inCart(product)"
+                        @add-prod-cart="addCart">
+                    </product-detail>
                 </li>
             </ul>
+
+            <hr>
+            <example-form></example-form>
         </div>
     </div>
 
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <script src="app.js"></script>
+    <script src="components/ProductDetail.js"></script>
+    <script src="components/ExampleForms.js"></script>
+    <script>
+        app.mount('#app')
+    </script>
 </body>
 </html>
